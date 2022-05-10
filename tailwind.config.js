@@ -3,7 +3,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'bannerImg' : "url(./../src/assets/images/bg.png)"
+      }
+    },
   },
   daisyui: {
     themes: [
@@ -16,7 +20,7 @@ module.exports = {
           "base-100": "#ffffff",
         },
       },
-      "dark",
+      "",
       "cupcake",
     ],
   },
