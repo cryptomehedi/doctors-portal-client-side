@@ -25,7 +25,7 @@ const Info = () => {
             },
     ]
     return (
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* <div class="card px-5 lg:card-side bg-gradient-to-r from-secondary to-primary shadow-xl">
                 <figure><img src={clock} alt="Album"/></figure>
                 <div class="card-body text-white">
