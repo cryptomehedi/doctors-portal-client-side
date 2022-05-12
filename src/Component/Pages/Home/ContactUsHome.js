@@ -2,7 +2,7 @@ import React from 'react';
 
 const ContactUsHome = () => {
     return (
-        <div className='mt-10 p-10 text-center bg-appointment'>
+        <div className='mt-10 p-10 text-center bg-cover bg-appointment'>
             <h3 className='text-xl text-primary'>Contact Us</h3>
             <h2 className='mt-4 text-white text-3xl'>Stay connected with us</h2>
             <form className='mt-6'>
