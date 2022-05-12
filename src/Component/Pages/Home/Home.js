@@ -3,6 +3,7 @@ import Banner from './Banner';
 import Feature from './Feature';
 import MakeAnAppointment from './MakeAnAppointment';
 import Services from './Services';
+import Testimonials from './Testimonials';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <Services/>
             <Feature/>
             <MakeAnAppointment/>
+            <Testimonials/>
         </div>
     );
 };
