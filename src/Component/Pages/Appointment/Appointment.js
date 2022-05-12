@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AvailableAppointment from './AvailableAppointment';
 import BannerAppointment from './BannerAppointment';
 
 const Appointment = () => {
+    const [date , setDate] = useState(new Date())
     return (
         <div>
-            <BannerAppointment/>
+            <BannerAppointment date={date} setDate={setDate}/>
+            <AvailableAppointment date={date}/>
         </div>
     );
 };
