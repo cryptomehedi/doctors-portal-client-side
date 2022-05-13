@@ -9,12 +9,12 @@ const AvailableAppointment = ({date}) => {
     const [treatment, setTreatment] = useState(null)
 
     useEffect(() => {
-        axios.get('services.json')
+        axios.get('http://localhost:4000/services')
         .then(data => {
+            console.log(data);
             setServices(data.data)
         })
     },[])
-
     return (
         <div className='my-20'>
             <h2 className='mb-20 text-xl text-center text-secondary'>Available Appointments on {format(date, 'PPP')}</h2>
@@ -23,7 +23,7 @@ const AvailableAppointment = ({date}) => {
                     services.map(service => <Service service={service} setTreatment={setTreatment} key={service._id} />)
                 }
             </div>
-            {treatment && <BookingModal treatment={treatment}/>}
+            {treatment && <BookingModal date={date} setTreatment={setTreatment} treatment={treatment}/>}
         </div>
     );
 };
