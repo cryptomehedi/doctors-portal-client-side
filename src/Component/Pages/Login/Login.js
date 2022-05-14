@@ -1,39 +1,87 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import SocialLogin from '../Shared/SocialLogin';
+import React, { useRef } from 'react';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import auth from '../../../firebase.init';
+import Spinner from '../Shared/Spinner';
+import SocialLogin from './SocialLogin';
 
 
 const Login = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const [ signInWithEmailAndPassword, user, loading,error] = useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail, sending, error1] = useSendPasswordResetEmail( auth );
+    const emailRef = useRef('')
+    const passwordRef = useRef('')
+    const location = useLocation()
+    let from = location.state?.from?.pathname || "/";
+    const navigate = useNavigate()
+
+    if(user){
+        toast.success(`Welcome Back 😉 ... ${ user?.user?.displayName || user?.user?.email }`)
+        navigate(from, { replace: true })
+    }
+
+
+    const handleSubmit = async e => {
+        e.preventDefault()
+        const email = emailRef.current.value
+        const password = passwordRef.current.value
+        await signInWithEmailAndPassword(email, password)
+    }
+    const handelRestPass = async e =>{
+        const email = emailRef.current.value
+        await sendPasswordResetEmail(email);
+        if(!error1){
+            const resolveAfter4Sec =  new Promise(resolve => setTimeout(() => resolve("Email Send Successfully"), 4000));
+            toast.promise(
+                resolveAfter4Sec,
+                {
+                    pending: 'Reset Password Email is pending',
+                    success: {
+                        render({data}){
+                        return `${data}`
+                        },
+                        // icon: "🟢",
+                        icon: <svg viewBox="0 0 24 24" width="100%" height="100%" fill="var(--toastify-icon-color-success)"><path d="M12 0a12 12 0 1012 12A12.014 12.014 0 0012 0zm6.927 8.2l-6.845 9.289a1.011 1.011 0 01-1.43.188l-4.888-3.908a1 1 0 111.25-1.562l4.076 3.261 6.227-8.451a1 1 0 111.61 1.183z"></path></svg>,
+                    }
+                }
+            )
+        }
+    }
 
     return (
         <div className='flex justify-center items-center '>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h2 className="card-title flex justify-center">Login</h2>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit}>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input {...register("email", { required: true })} type="email" placeholder="email" className="input input-bordered" />
-                            <p className="text-red-500">{errors.email?.type === 'required' && "Email is required"}</p>
+                            <input ref={emailRef} type="email" placeholder="email" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input {...register("pass", { required: true })} type="text" placeholder="password" className="input input-bordered" />
-                            <p className='text-red-500'>{errors.pass && "Password is Required"}</p>
+                            <input ref={passwordRef} type="text" placeholder="password" className="input input-bordered" />
                             <label className="label">
-                                <button className="label-text-alt link link-hover">Forgot password?</button>
+                                <button onClick={handelRestPass} className="label-text-alt link link-hover">Forgot password?</button>
                             </label>
+                            <p className='text-red-500 ml-5 duration-1000 delay-700 font-semibold'>{error?.message.length > 6 ? error?.message : error1?.message}</p>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-accent  text-white uppercase font-bold">Login</button>
+                            <button className="btn btn-accent text-white uppercase font-bold">Login</button>
                         </div>
+                        <div className='text-center mt-2 font-semibold'>
+                                        {
+                                            loading && <Spinner text='Your Login Is Processing...' />
+                                        }
+                                        {
+                                            sending && <Spinner text='Your Forget Password Email Is Sending...' />
+                                        }
+                                    </div>
                     </form>
                     <p className="text-center">New To Doctors Portal? <Link to='/register' className='text-secondary cursor-pointer'>Create New Account</Link> </p>
                     <SocialLogin/>
