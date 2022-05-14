@@ -1,7 +1,10 @@
 import { format } from 'date-fns';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
 
 const BookingModal = ({date, treatment, setTreatment}) => {
+    const [user] = useAuthState(auth)
     const {name, slots} = treatment;
 
     const handleBooking = e => {
@@ -10,7 +13,7 @@ const BookingModal = ({date, treatment, setTreatment}) => {
         console.log(slot)
         setTreatment(null)
     }
-
+    console.log(user)
     return (
         <div>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -25,9 +28,9 @@ const BookingModal = ({date, treatment, setTreatment}) => {
                                 slots.map(slot => <option key={slot} value={slot} >{slot}</option>)
                             }
                         </select>
-                        <input type="text" name='name' placeholder="Your Name" className="input input-bordered w-full max-w-xs" />
-                        <input type="email" name='email' placeholder="Email Address" className="input input-bordered w-full max-w-xs" />
-                        <input type="text" name="phone" placeholder="Phone Number" className="input input-bordered w-full max-w-xs" />
+                        <input type="text" disabled defaultValue={user.displayName} name='name' placeholder="Your Name" className="input input-bordered w-full max-w-xs" />
+                        <input type="email" name='email' disabled defaultValue={user.email} placeholder="Email Address" className="input input-bordered w-full max-w-xs" />
+                        <input type="text" name="phone" placeholder="Phone Number" className="input input-bordered w-full max-w-xs" required />
                         <input type="submit" value="Submit" placeholder="Type here" className="btn btn-secondary w-full max-w-xs" />
                     </form>
                 </div>
