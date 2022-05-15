@@ -11,14 +11,12 @@ const Appointment = () => {
     // console.log(fridays);
     useEffect(() => {
         const hDay =fridays.find(friday => friday.toString().slice(0, 15) === date?.toString().slice(0, 15))
-        console.log(hDay)
-        if(hDay?.toString().slice(0, 15) === date?.toString().slice(0, 15)){
+        if(hDay){
             setHoliday(true)
         }else{
             setHoliday(false)
         }
     },[date , fridays])
-    console.log(holyday)
 
     return (
         <div>

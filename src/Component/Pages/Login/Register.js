@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -18,10 +18,13 @@ const Register = () => {
     const location = useLocation()
     let from = location.state?.from?.pathname || "/";
     const navigate = useNavigate()
-    if(user){
-        toast.success(`Congratulations ! "${user?.user?.displayName || user?.user?.email}" Please Confirm Your Email Address`)
-        navigate(from, { replace: true })
-    }
+    
+    useEffect(()=>{
+        if(user){
+            toast.success(`Congratulations ! "${user?.user?.displayName || user?.user?.email}" Please Confirm Your Email Address`)
+            navigate(from, { replace: true })
+        }
+    },[user, navigate, from])
 
     const pass = useRef({});
     pass.current = watch("password", "");

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,10 +10,14 @@ const SocialLogin = () => {
     const location = useLocation()
     let from = location.state?.from?.pathname || "/";
     const navigate = useNavigate()
-    if(user){
-        toast.success(`Welcome Back 😉 ... ${ user?.user?.displayName || user?.user?.email }`)
-        navigate(from, { replace: true })
-    }
+    
+    useEffect(() => {
+        if(user){
+            toast.success(`Welcome Back 😉 ... ${ user?.user?.displayName || user?.user?.email }`)
+            navigate(from, { replace: true })
+        }
+    },[user , navigate, from])
+    
     return (
         <div>
             <div className="divider">OR</div>

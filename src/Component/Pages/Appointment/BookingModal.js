@@ -25,11 +25,11 @@ const BookingModal = ({date, treatment, setTreatment}) => {
                         <input name="date" type="text" disabled defaultValue={format(date, 'PPP')} className="input input-bordered w-full max-w-xs" />
                         <select name="slot" className="select select-bordered w-full max-w-xs">
                             {
-                                slots.map(slot => <option key={slot} value={slot} >{slot}</option>)
+                                slots.map((slot , i) => <option key={i} value={slot} >{slot}</option>)
                             }
                         </select>
-                        <input type="text" disabled defaultValue={user.displayName} name='name' placeholder="Your Name" className="input input-bordered w-full max-w-xs" />
-                        <input type="email" name='email' disabled defaultValue={user.email} placeholder="Email Address" className="input input-bordered w-full max-w-xs" />
+                        <input type="text" disabled defaultValue={user?.displayName || ''} name='name' placeholder="Your Name" className="input input-bordered w-full max-w-xs" />
+                        <input type="email" name='email' disabled defaultValue={user?.email || ''} placeholder="Email Address" className="input input-bordered w-full max-w-xs" />
                         <input type="text" name="phone" placeholder="Phone Number" className="input input-bordered w-full max-w-xs" required />
                         <input type="submit" value="Submit" placeholder="Type here" className="btn btn-secondary w-full max-w-xs" />
                     </form>
