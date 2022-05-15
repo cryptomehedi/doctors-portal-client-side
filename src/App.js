@@ -7,12 +7,12 @@ import Register from './Component/Pages/Login/Register';
 import Footer from './Component/Pages/Shared/Footer';
 import Nav from './Component/Pages/Shared/Nav';
 import { ToastContainer } from 'react-toastify';
-
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 import RequireAuth from './Component/Pages/Shared/RequireAuth';
 import DashBoard from './Component/Pages/DashBoard/DashBoard';
 import MyAppointment from './Component/Pages/DashBoard/MyAppointment';
 import MyReview from './Component/Pages/DashBoard/MyReview';
+import AllUsers from './Component/Pages/DashBoard/AllUsers';
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
             <Route path="/dashboard" element={<RequireAuth><DashBoard/></RequireAuth>}>
               <Route index element={<MyAppointment/>}/>
               <Route path="review" element={<MyReview/>}/>
+              <Route path="allUsers" element={<AllUsers/>}/>
             </Route>
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
