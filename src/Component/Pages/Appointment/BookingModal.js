@@ -1,19 +1,40 @@
+import axios from 'axios';
 import { format } from 'date-fns';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 
-const BookingModal = ({date, treatment, setTreatment}) => {
+const BookingModal = ({date, treatment, setTreatment, refetch}) => {
     const [user] = useAuthState(auth)
-    const {name, slots} = treatment;
-
+    console.log(user);
+    const {name, _id,  slots} = treatment;
+    const formattedDate = format(date, 'PPP')
     const handleBooking = e => {
         e.preventDefault();
         const slot = e.target.slot.value
-        console.log(slot)
-        setTreatment(null)
+
+        const booking = {
+            treatmentId: _id,
+            treatment: name,
+            date: formattedDate,
+            slot,
+            patientName : user.displayName,
+            patientEmail : user.email,
+            phone: e.target.phone.value
+        }
+        axios.post('http://localhost:4000/booking', booking)
+        .then(data => {
+            if(data.data.success) {
+                toast.success(`Your Appointment is set ${formattedDate} at ${slot} for ${name}`)
+            }else{
+                toast.error(`You already have an appointment for ${data.data.booking?.treatment}  on ${data.data.booking?.date} at ${data.data.booking?.slot}`)
+            }
+            refetch()
+            setTreatment(null)
+        })
+        
     }
-    console.log(user)
     return (
         <div>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -25,12 +46,12 @@ const BookingModal = ({date, treatment, setTreatment}) => {
                         <input name="date" type="text" disabled defaultValue={format(date, 'PPP')} className="input input-bordered w-full max-w-xs" />
                         <select name="slot" className="select select-bordered w-full max-w-xs">
                             {
-                                slots.map((slot , i) => <option key={i} value={slot} >{slot}</option>)
+                                slots.map((slot , i) => <option key={i}  value={slot} >{slot}</option>)
                             }
                         </select>
                         <input type="text" disabled defaultValue={user?.displayName || ''} name='name' placeholder="Your Name" className="input input-bordered w-full max-w-xs" />
                         <input type="email" name='email' disabled defaultValue={user?.email || ''} placeholder="Email Address" className="input input-bordered w-full max-w-xs" />
-                        <input type="text" name="phone" placeholder="Phone Number" className="input input-bordered w-full max-w-xs" required />
+                        <input required type="text" name="phone" placeholder="Phone Number" className="input input-bordered w-full max-w-xs" />
                         <input type="submit" value="Submit" placeholder="Type here" className="btn btn-secondary w-full max-w-xs" />
                     </form>
                 </div>

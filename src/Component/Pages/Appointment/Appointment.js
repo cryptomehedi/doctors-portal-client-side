@@ -7,7 +7,6 @@ const Appointment = () => {
     const [fridays , setFridays] = useState([])
     const [holyday , setHoliday] = useState(false)
     
-
     // console.log(fridays);
     useEffect(() => {
         const hDay =fridays.find(friday => friday.toString().slice(0, 15) === date?.toString().slice(0, 15))
