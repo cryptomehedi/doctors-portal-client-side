@@ -3,6 +3,7 @@ import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
+import useToken from '../../hooks/useToken';
 import Spinner from '../Shared/Spinner';
 
 const SocialLogin = () => {
@@ -10,14 +11,15 @@ const SocialLogin = () => {
     const location = useLocation()
     let from = location.state?.from?.pathname || "/";
     const navigate = useNavigate()
+    const [token] = useToken(user)
     
     useEffect(() => {
-        if(user){
+        if(token){
             toast.success(`Welcome Back 😉 ... ${ user?.user?.displayName || user?.user?.email }`)
             navigate(from, { replace: true })
         }
-    },[user , navigate, from])
-    
+    },[user, token , navigate, from])
+
     return (
         <div>
             <div className="divider">OR</div>

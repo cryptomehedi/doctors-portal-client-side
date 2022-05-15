@@ -19,7 +19,7 @@ const MyAppointment = () => {
     },[user])
     return (
         <div>
-            <h2>MyAppointment: {appointments.length}</h2>
+            <h2>My Total Appointment: {appointments.length}</h2>
             <div class="overflow-x-auto">
                 <table class="table w-full">
                     {/* <!-- head --> */}

@@ -16,7 +16,7 @@ const Nav = () => {
                                 user ? 
                                 <>
                                     <li><Link to="/dashboard">DashBoard</Link></li>
-                                    <li><button className="btn btn-primary bg-gradient-to-r from-secondary to-primary text-white uppercase font-bold" onClick={()=> signOut(auth)}>Sign Out</button></li>
+                                    <li><button className="btn btn-primary bg-gradient-to-r from-secondary to-primary text-white uppercase font-bold" onClick={()=> {signOut(auth); localStorage.removeItem('accessToken')}}>Sign Out</button></li>
                                 </>
                                 :<li><Link to="/login">Login</Link></li>
                             }

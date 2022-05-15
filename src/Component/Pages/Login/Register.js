@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import Spinner from '../Shared/Spinner';
 import SocialLogin from './SocialLogin';
+import useToken from '../../hooks/useToken';
 
 
 const Register = () => {
@@ -14,17 +15,18 @@ const Register = () => {
     const { register, formState: { errors }, handleSubmit, watch } = useForm();
     const [show, setShow] = useState(false)
     const [checked, setChecked] = useState(false)
+    const [token] = useToken(user)
 
     const location = useLocation()
     let from = location.state?.from?.pathname || "/";
     const navigate = useNavigate()
     
     useEffect(()=>{
-        if(user){
+        if(token){
             toast.success(`Congratulations ! "${user?.user?.displayName || user?.user?.email}" Please Confirm Your Email Address`)
             navigate(from, { replace: true })
         }
-    },[user, navigate, from])
+    },[token, navigate, user, from])
 
     const pass = useRef({});
     pass.current = watch("password", "");
