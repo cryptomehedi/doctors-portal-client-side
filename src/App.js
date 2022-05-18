@@ -13,6 +13,8 @@ import DashBoard from './Component/Pages/DashBoard/DashBoard';
 import MyAppointment from './Component/Pages/DashBoard/MyAppointment';
 import MyReview from './Component/Pages/DashBoard/MyReview';
 import AllUsers from './Component/Pages/DashBoard/AllUsers';
+import RequireAdmin from './Component/Pages/Shared/RequireAdmin';
+import DeleteUsers from './Component/Pages/DashBoard/DeleteUsers';
 
 function App() {
   return (
@@ -25,7 +27,8 @@ function App() {
             <Route path="/dashboard" element={<RequireAuth><DashBoard/></RequireAuth>}>
               <Route index element={<MyAppointment/>}/>
               <Route path="review" element={<MyReview/>}/>
-              <Route path="allUsers" element={<AllUsers/>}/>
+              <Route path="allUsers" element={<RequireAdmin><AllUsers/></RequireAdmin>}/>
+              <Route path="deleteUsers" element={<RequireAdmin><DeleteUsers/></RequireAdmin>}/>
             </Route>
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />

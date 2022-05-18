@@ -4,7 +4,7 @@ import Info from './Info';
 const Banner = () => {
     return (
         <div>
-            <div className="hero min-h-screen bg-cover bg-bannerImg">
+            <div className="hero lg:min-h-screen bg-cover rounded-lg bg-bannerImg">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <img src={bannerImg} alt="" className="max-w-sm md:max-w-md lg:max-w-screen-sm rounded-lg shadow-2xl" />
                     <div>

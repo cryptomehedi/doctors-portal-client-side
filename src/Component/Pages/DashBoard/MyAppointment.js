@@ -4,18 +4,22 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { TrashIcon } from '@heroicons/react/solid'
 import axiosPrivate from '../../Api/axiosPrivate';
+import Spinner from '../Shared/Spinner';
 
 const MyAppointment = () => {
+    const [loading, setLoading] = useState(true)
     const [appointments, setAppointments] =useState([])
     const [user] = useAuthState(auth)
     useEffect(() => {
         if(user){
-            axiosPrivate.get(`http://localhost:4000/booking?patient=${user.email}`)
+            axiosPrivate.get(`https://doctorsportal-api.herokuapp.com/booking?patient=${user.email}`)
             .then(data => {
             setAppointments(data.data)
+            setLoading(false)
         })
         }
     },[user])
+
     return (
         <div>
             <h2>My Total Appointment: {appointments.length}</h2>
@@ -45,6 +49,7 @@ const MyAppointment = () => {
                     </tbody>
                 </table>
             </div>
+            {loading && <div className="text-center"><Spinner text='Your Total Appointments are Loading...' /></div>}
         </div>
     );
 };

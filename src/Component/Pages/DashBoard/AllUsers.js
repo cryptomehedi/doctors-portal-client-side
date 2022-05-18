@@ -5,7 +5,7 @@ import Spinner from '../Shared/Spinner';
 import UserRow from './UserRow';
 
 const AllUsers = () => {
-    const {data : users, isLoading, refetch} = useQuery('users', ()=> axiosPrivate.get('http://localhost:4000/user'))
+    const {data : users, isLoading, refetch} = useQuery('users', ()=> axiosPrivate.get('https://doctorsportal-api.herokuapp.com/user'))
     if(isLoading) {
         return <Spinner/>
     }

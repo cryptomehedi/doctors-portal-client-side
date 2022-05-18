@@ -23,7 +23,7 @@ const BookingModal = ({date, treatment, setTreatment, refetch}) => {
             patientEmail : user.email,
             phone: e.target.phone.value
         }
-        axios.post('http://localhost:4000/booking', booking)
+        axios.post('https://doctorsportal-api.herokuapp.com/booking', booking)
         .then(data => {
             if(data.data.success) {
                 toast.success(`Your Appointment is set ${formattedDate} at ${slot} for ${name}`)

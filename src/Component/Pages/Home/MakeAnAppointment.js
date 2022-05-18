@@ -2,7 +2,7 @@ import React from 'react';
 import doctor from '../../../assets/images/doctor-small.png'
 const MakeAnAppointment = () => {
     return (
-        <section className='flex justify-center bg-cover mt-32 items-center bg-appointment'>
+        <section className='flex justify-center rounded-lg bg-cover mt-32 items-center bg-appointment'>
             <div className='hidden lg:block flex-1'>
                 <img className='mt-[-100px] ' src={doctor} alt="" />
             </div>

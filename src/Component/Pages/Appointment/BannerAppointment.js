@@ -24,10 +24,10 @@ const BannerAppointment = ({date , setDate , fridays , setFridays}) => {
     },[date , currentMonth, currentYear, setFridays])
     return (
         <div>
-            <div className="hero min-h-screen bg-cover bg-bannerImg">
+            <div className="hero lg:min-h-screen bg-cover bg-bannerImg">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <img src={chair} alt="" className="max-w-sm md:max-w-md lg:max-w-screen-sm rounded-lg shadow-2xl" />
-                    <div className='shadow-2xl rounded-2xl shadow-gray-400'>
+                    <div className='shadow-2xl mt-10 lg:mt-0 lg:mr-16 rounded-2xl shadow-gray-400'>
                         <DayPicker
                         mode="single"
                         selected={date}
