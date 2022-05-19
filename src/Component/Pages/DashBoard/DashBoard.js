@@ -34,7 +34,10 @@ const DashBoard = () => {
                     <li><CustomLink to='/dashboard'>Appointment</CustomLink></li>
                     <li><CustomLink to='/dashboard/review'>Reviews</CustomLink></li>
                     {
-                        user.email ==='classicalmehedi@gmail.com' && admin && <li><CustomLink to='/dashboard/deleteUsers'>Delete Users</CustomLink></li>
+                        user.email ==='classicalmehedi@gmail.com' && admin && <>
+                            <li><CustomLink to='/dashboard/deleteUsers'>Delete Users</CustomLink></li>
+                            <li><CustomLink to='/dashboard/add-doctor'> Add Doctor</CustomLink></li>
+                        </>
                     }
                 </ul>
             

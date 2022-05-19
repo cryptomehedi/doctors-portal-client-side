@@ -15,6 +15,7 @@ import MyReview from './Component/Pages/DashBoard/MyReview';
 import AllUsers from './Component/Pages/DashBoard/AllUsers';
 import RequireAdmin from './Component/Pages/Shared/RequireAdmin';
 import DeleteUsers from './Component/Pages/DashBoard/DeleteUsers';
+import AddDoctor from './Component/Pages/DashBoard/AddDoctor';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="review" element={<MyReview/>}/>
               <Route path="allUsers" element={<RequireAdmin><AllUsers/></RequireAdmin>}/>
               <Route path="deleteUsers" element={<RequireAdmin><DeleteUsers/></RequireAdmin>}/>
+              <Route path="add-doctor" element={<RequireAdmin><AddDoctor/></RequireAdmin>}/>
             </Route>
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
