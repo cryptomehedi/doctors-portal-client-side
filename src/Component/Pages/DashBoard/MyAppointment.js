@@ -12,7 +12,7 @@ const MyAppointment = () => {
     const [user] = useAuthState(auth)
     useEffect(() => {
         if(user){
-            axiosPrivate.get(`https://doctorsportal-api.herokuapp.com/booking?patient=${user.email}`)
+            axiosPrivate.get(`http://localhost:4000/booking?patient=${user.email}`)
             .then(data => {
             setAppointments(data.data)
             setLoading(false)

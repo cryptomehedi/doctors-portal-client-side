@@ -12,10 +12,10 @@ const AvailableAppointment = ({date, holyday}) => {
     
     const formattedDate = format(date, 'PPP')
 
-    const {data: services, isLoading, refetch} = useQuery(['available', formattedDate], ()=>axios.get(`https://doctorsportal-api.herokuapp.com/available?date=${formattedDate}`))
+    const {data: services, isLoading, refetch} = useQuery(['available', formattedDate], ()=>axios.get(`http://localhost:4000/available?date=${formattedDate}`))
     
     // {
-    //     // fetch(`https://doctorsportal-api.herokuapp.com/available?date=${formattedDate}`)
+    //     // fetch(`http://localhost:4000/available?date=${formattedDate}`)
     //     // .then(res=>res.json())
         
         // console.log(services?.data);
@@ -26,7 +26,7 @@ const AvailableAppointment = ({date, holyday}) => {
     }
     // useEffect(() => {
     //     const formattedDate = format(date, 'PPP')
-    //     axios.get(`https://doctorsportal-api.herokuapp.com/available?date=${formattedDate}`)
+    //     axios.get(`http://localhost:4000/available?date=${formattedDate}`)
     //     .then(data => {
     //         setServices(data.data)
     //     })

@@ -26,7 +26,7 @@ const DashBoard = () => {
             </div> 
             <div className="drawer-side">
                 <label htmlFor="DB-sideBar" className="drawer-overlay"></label> 
-                <ul className="menu p-4 overflow-y-auto w-40 bg-base-100 text-base-content">
+                <ul className="menu p-4 overflow-y-auto w-48 bg-base-100 text-base-content">
                     {/* <!-- Sidebar content here --> */}
                     {
                         admin && <li><CustomLink to='/dashboard/allUsers'>All Users</CustomLink></li>
@@ -37,6 +37,7 @@ const DashBoard = () => {
                         user.email ==='classicalmehedi@gmail.com' && admin && <>
                             <li><CustomLink to='/dashboard/deleteUsers'>Delete Users</CustomLink></li>
                             <li><CustomLink to='/dashboard/add-doctor'> Add Doctor</CustomLink></li>
+                            <li><CustomLink to='/dashboard/manege-doctor'> Manege Doctor</CustomLink></li>
                         </>
                     }
                 </ul>

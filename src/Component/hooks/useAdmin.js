@@ -6,7 +6,7 @@ const useAdmin = user =>{
     const [adminLoading, setAdminLoading] = useState(true)
     const {email} = user;
     useEffect(() =>{
-        axiosPrivate.get(`https://doctorsportal-api.herokuapp.com/admin/${email}`)
+        axiosPrivate.get(`http://localhost:4000/admin/${email}`)
         .then(data=>{
             setAdmin(data?.data)
             setAdminLoading(false)

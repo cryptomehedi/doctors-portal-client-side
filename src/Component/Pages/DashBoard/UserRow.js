@@ -7,7 +7,7 @@ const UserRow = ({user , refetch, index}) => {
     const {email, role} = user;
 
     const makeAdmin = () => {
-        axiosPrivate.put(`https://doctorsportal-api.herokuapp.com/user/admin/${email}`)
+        axiosPrivate.put(`http://localhost:4000/user/admin/${email}`)
         .then(data => {
             console.log(data?.data?.result?.modifiedCount);
             if(data?.data?.result?.modifiedCount){
